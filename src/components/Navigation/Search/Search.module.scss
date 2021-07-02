@@ -1,0 +1,20 @@
+.Search {
+	width: 40%;
+
+	@media (max-width: 1044px) {
+		width: 35%;
+	}
+
+	@media (max-width: 768px) {
+		width: 50%;
+	}
+
+	input {
+		position: relative;
+		width: 100%;
+		background: #ededf0;
+		border-radius: 99px;
+		border: none;
+		padding: 8px 40px;
+	}
+}

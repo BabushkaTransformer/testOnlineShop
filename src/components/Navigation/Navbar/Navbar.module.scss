@@ -1,0 +1,17 @@
+.Navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	@media (max-width: 901px) {
+		display: none;
+	}
+}
+
+.Item {
+	margin-right: 45px;
+	margin-right: 20px;
+	img {
+		margin: 0 auto;
+	}
+}

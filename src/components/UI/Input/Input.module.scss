@@ -1,0 +1,21 @@
+.InputElement {
+	width: 475px;
+	background: #ffffff;
+	box-shadow: inset 0px -2px 1px rgba(0, 0, 0, 0.25);
+	border-radius: 8px;
+	border: none;
+	padding: 16px 52px;
+	margin-top: 16px;
+
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		/* display: none; <- Crashes Chrome on hover */
+		-webkit-appearance: none;
+		margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+	}
+}
+
+.Invalid {
+	border: 1px solid red;
+	background-color: #fda49a;
+}
