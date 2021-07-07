@@ -24,14 +24,33 @@ class Main extends Component {
 				console.log(error);
 			});
 	}
-
+	gete() {
+		axios
+			.get("https://35.198.170.4/api/products/")
+			.then((response) => {
+				this.props.setProducts([...response.data]);
+				this.setState({
+					loading: false,
+				});
+			})
+			.catch((error) => {
+				this.setState({ loading: false });
+				console.log(error);
+			});
+	}
 	render() {
 		let items = (
 			<CardItems products={this.props.filteredProducts} loading={this.state.loading} />
 		);
 		if (this.state.loading) items = <Spinner />;
 
-		return <div>{items}</div>;
+		return (
+			<div>
+				{" "}
+				<div onClick={gete}>df</div>
+				{items}
+			</div>
+		);
 	}
 }
 
