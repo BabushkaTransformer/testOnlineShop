@@ -4,13 +4,15 @@ import SwiperCore, { Navigation, Pagination, Thumbs } from "swiper";
 import classes from "./CardPage.module.scss";
 import { useHistory, useParams } from "react-router";
 import axios from "axios";
+import { connect } from "react-redux";
 import noImg from "../../assets/images/no-image.jpg";
+import Button from "../../components/UI/Button/Button";
 
 import "swiper/swiper-bundle.css";
 
 SwiperCore.use([Navigation, Pagination, Thumbs]);
 
-const CardPage = () => {
+const CardPage = (props) => {
 	const history = useHistory();
 	const { id } = useParams();
 	const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -26,7 +28,7 @@ const CardPage = () => {
 	}, [id]);
 
 	const deleteProductHandler = () => {
-		let token = localStorage.getItem("token");
+		let token = sessionStorage.getItem("token");
 
 		const headers = {
 			Accept: "application/json",
@@ -80,19 +82,28 @@ const CardPage = () => {
 				</div>
 
 				<div className={classes.Actions}>
-					<button className={classes.Btn} onClick={deleteProductHandler}>
-						Удалить продукт
-					</button>
-					<button className={classes.Btn}>В корзину</button>
+					{props.isAuth ? (
+						<Button border clicked={deleteProductHandler}>
+							Удалить продукт
+						</Button>
+					) : null}
+
+					<Button border>В корзину</Button>
 				</div>
 			</div>
 			<div className={classes.Change}>
-				<a href={`/ChangeProduct/${id}`}>
-					<button className={classes.Btn}>Изменить</button>
-				</a>
+				{props.isAuth ? (
+					<div onClick={() => history.push(`/changeProduct/${id}`)}>
+						<Button border>Изменить</Button>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);
 };
 
-export default CardPage;
+const mapStateToProps = (state) => ({
+	isAuth: state.isAuth,
+});
+
+export default connect(mapStateToProps)(CardPage);

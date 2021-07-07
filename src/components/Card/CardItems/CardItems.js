@@ -4,6 +4,7 @@ import classes from "./CardItems.module.scss";
 
 const CardItems = (props) => {
 	let transformedProducts = null;
+
 	if (props.loading) {
 		transformedProducts = <Spinner />;
 	} else {

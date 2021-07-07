@@ -20,7 +20,6 @@ const AddProduct = ({ adding }) => {
 	useEffect(() => {
 		if (!adding) {
 			setLoading(true);
-			console.log("adsfa");
 			axios
 				.get(`http://35.198.170.4/api/products/${id}/`)
 				.then((response) => {
@@ -41,10 +40,9 @@ const AddProduct = ({ adding }) => {
 	const changeProductHandler = () => {
 		setLoading(true);
 
-		let token = localStorage.getItem("token");
+		let token = sessionStorage.getItem("token");
 		let img = file[0];
 		let fd = new FormData();
-
 		fd.append("name", name);
 		fd.append("description", description);
 		fd.append("amount", amount);
@@ -66,7 +64,7 @@ const AddProduct = ({ adding }) => {
 				history.push("/");
 			})
 			.catch((error) => {
-				alert("Вы, походу, что-то забыли... (Изображение)");
+				alert("Вы, походу, что-то забыли... (Изображение) измените его, это БАГ");
 				setLoading(false);
 			});
 	};
@@ -155,9 +153,9 @@ const AddProduct = ({ adding }) => {
 				min="0"
 			/>
 			{!adding ? (
-				<Button onClick={changeProductHandler}>Сохранить изменения</Button>
+				<Button clicked={changeProductHandler}>Сохранить изменения</Button>
 			) : (
-				<Button onClick={addProductHandler}>Добавить продукт</Button>
+				<Button clicked={addProductHandler}>Добавить продукт</Button>
 			)}
 		</div>
 	);

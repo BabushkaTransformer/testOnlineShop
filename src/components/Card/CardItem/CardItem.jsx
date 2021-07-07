@@ -1,11 +1,14 @@
 import classes from "./CardItem.module.scss";
 import noImg from "../../../assets/images/no-image.jpg";
+import { useHistory } from "react-router";
 
 const CardItem = (props) => {
+	const history = useHistory();
+
 	return (
-		<a className={classes.CardItem} href={`/CardPage/${props.id}`}>
+		<div className={classes.CardItem} onClick={() => history.push(`/CardPage/${props.id}`)}>
 			<div className={classes.Image}>
-				<img src={props.img ? props.img : noImg} alt="ыва" />
+				<img src={props.img ? props.img : noImg} alt={props.title} />
 			</div>
 
 			<div className={classes.Description}>
@@ -15,9 +18,9 @@ const CardItem = (props) => {
 			</div>
 
 			<div className={classes.Btn}>
-				<div>В корзину</div>
+				<span>В корзину</span>
 			</div>
-		</a>
+		</div>
 	);
 };
 

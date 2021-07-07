@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import CardItems from "../../components/Card/CardItems/CardItems";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 class Main extends Component {
 	state = {
@@ -9,6 +10,7 @@ class Main extends Component {
 
 	componentDidMount() {
 		this.setState({ loading: true });
+
 		axios
 			.get("http://35.198.170.4/api/products/")
 			.then((response) => {
@@ -17,15 +19,19 @@ class Main extends Component {
 					loading: false,
 				});
 			})
-			.catch((error) => this.setState({ loading: false }));
+			.catch((error) => {
+				this.setState({ loading: false });
+				console.log(error);
+			});
 	}
 
 	render() {
-		return (
-			<div>
-				<CardItems products={this.props.filteredProducts} loading={this.state.loading} />
-			</div>
+		let items = (
+			<CardItems products={this.props.filteredProducts} loading={this.state.loading} />
 		);
+		if (this.state.loading) items = <Spinner />;
+
+		return <div>{items}</div>;
 	}
 }
 

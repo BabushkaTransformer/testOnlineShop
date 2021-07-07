@@ -1,4 +1,5 @@
 .App {
     background: #F9F7FD;
-    height: 100vh;
+    background-attachment: fixed;
+    min-height: 100vh;
 }

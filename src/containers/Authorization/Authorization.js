@@ -3,8 +3,9 @@ import axios from "axios";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import classes from "./Authorization.module.scss";
-
+import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import isAuth from "../../store/actions/isAuth";
 
 class Authorization extends Component {
 	state = {
@@ -29,6 +30,7 @@ class Authorization extends Component {
 				elementConfig: {
 					type: "password",
 					placeholder: "Пароль",
+					suggested: "current-password",
 				},
 				value: "",
 				validation: {
@@ -41,12 +43,12 @@ class Authorization extends Component {
 		},
 		formIsValid: false,
 		loading: false,
-		isAuthenticated: false,
 	};
 
 	authorizationHandler = (event) => {
 		event.preventDefault();
 		this.setState({ loading: true });
+
 		const formData = {};
 		for (let formElementIdentifier in this.state.Form) {
 			formData[formElementIdentifier] = this.state.Form[formElementIdentifier].value;
@@ -56,11 +58,16 @@ class Authorization extends Component {
 			.post("http://35.198.170.4/accounts/login/", formData)
 			.then((response) => {
 				if (response.data.token && response.data.token.length > 10) {
-					this.setState({ isAuthenticated: true });
-					localStorage.setItem("token", response.data.token);
+					this.props.setAuth();
+					sessionStorage.setItem("token", response.data.token);
 				}
+				this.setState({ loading: false });
+				this.props.history.push("/");
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => {
+				alert("Неверный логин и пароль! adminadminadmin");
+				this.setState({ loading: false });
+			});
 	};
 
 	checkValidity(value, rules) {
@@ -155,4 +162,8 @@ class Authorization extends Component {
 	}
 }
 
-export default Authorization;
+const mapDispatchToProps = (dispatch) => ({
+	setAuth: () => dispatch(isAuth()),
+});
+
+export default connect(null, mapDispatchToProps)(Authorization);
