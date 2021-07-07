@@ -21,7 +21,7 @@ const AddProduct = ({ adding }) => {
 		if (!adding) {
 			setLoading(true);
 			axios
-				.get(`https://35.198.170.4/api/products/${id}/`)
+				.get(`http://35.198.170.4/api/products/${id}/`)
 				.then((response) => {
 					setName(response.data.name);
 					setPrice(response.data.price);
@@ -56,7 +56,7 @@ const AddProduct = ({ adding }) => {
 		};
 
 		axios
-			.put(`https://35.198.170.4/api/products/${id}/`, fd, {
+			.put(`http://35.198.170.4/api/products/${id}/`, fd, {
 				headers: headers,
 			})
 			.then((response) => {

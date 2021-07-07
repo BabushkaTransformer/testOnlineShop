@@ -20,7 +20,7 @@ const CardPage = (props) => {
 
 	useEffect(() => {
 		axios
-			.get(`https://35.198.170.4/api/products/${id}/`)
+			.get(`http://35.198.170.4/api/products/${id}/`)
 			.then((response) => {
 				setProduct(response.data);
 			})
