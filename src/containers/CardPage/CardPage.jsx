@@ -36,7 +36,7 @@ const CardPage = (props) => {
 			Authorization: "Token " + token,
 		};
 		axios
-			.delete(`https://35.198.170.4/api/products/${id}/`, {
+			.delete(`http://35.198.170.4/api/products/${id}/`, {
 				headers: headers,
 			})
 			.then((response) => {
