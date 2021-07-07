@@ -20,7 +20,7 @@ const CardPage = (props) => {
 
 	useEffect(() => {
 		axios
-			.get(`http://35.198.170.4/api/products/${id}/`)
+			.get(`https://35.198.170.4/api/products/${id}/`)
 			.then((response) => {
 				setProduct(response.data);
 			})
@@ -36,7 +36,7 @@ const CardPage = (props) => {
 			Authorization: "Token " + token,
 		};
 		axios
-			.delete(`http://35.198.170.4/api/products/${id}/`, {
+			.delete(`https://35.198.170.4/api/products/${id}/`, {
 				headers: headers,
 			})
 			.then((response) => {

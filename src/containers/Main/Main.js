@@ -12,7 +12,7 @@ class Main extends Component {
 		this.setState({ loading: true });
 
 		axios
-			.get("http://35.198.170.4/api/products/")
+			.get("https://35.198.170.4/api/products/")
 			.then((response) => {
 				this.props.setProducts([...response.data]);
 				this.setState({
