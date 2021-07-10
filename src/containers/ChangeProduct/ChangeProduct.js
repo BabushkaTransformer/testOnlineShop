@@ -73,7 +73,7 @@ const AddProduct = ({ adding }) => {
 	const addProductHandler = () => {
 		setLoading(false);
 
-		let token = localStorage.getItem("token");
+		let token = sessionStorage.getItem("token");
 		let img = file[0];
 		let fd = new FormData();
 
